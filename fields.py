@@ -10,16 +10,20 @@ from django.forms import fields
 full_url = URLField(default_protocol="http",
            protocols=["https","ssh","mailto"])
 url = URLField()
-
-
 """
 
 
 class URLField(models.Field):
+    """
+    Custom Django URLField that takes acceptable protocols.
+    """
     description = "URL Field"
     __metaclass__ = models.SubfieldBase
 
     def __init__(self, default_protocol="http", protocols=[], *args, **kwargs):
+        """
+        Setup the URLField with parameters and a max_length
+        """
         #Sets the max length of 4096 in the database.
         kwargs['max_length'] = kwargs.get("max_length", 4096)
         #Sets the default protocol
@@ -32,18 +36,25 @@ class URLField(models.Field):
         super(URLField, self).__init__(*args, **kwargs)
 
     def to_python(self, value):
-        #Either return a blank string, or the url.
+        """
+        Either return a blank string, or the url.
+        """
         if not value:
             return ""
         elif isinstance(value, basestring):
             return value
 
     def db_type(self, connection):
-        #Set as VARCHAR for Postgres.
+        """
+        Set as VARCHAR for Postgres.
+        """
         #TODO: Set up multiple backend testing.
         return "VARCHAR(%s)" % (self.max_length, )
 
     def formfield(self, **kwargs):
+        """
+        Setup to use the URLFieldForm for our fields form.
+        """
         defaults = {'form_class': URLFieldForm}
         defaults['default_protocol'] = self.default_protocol
         defaults['protocols'] = self.protocols
@@ -84,7 +95,13 @@ class URLField(models.Field):
 
 
 class URLFieldForm(fields.CharField):
+    """
+    Custom Django URLFieldForm
+    """
     def __init__(self, *args, **kwargs):
+        """
+        Setup the URLField with parameters and a max_length
+        """
         self.default_protocol = kwargs.pop("default_protocol", "http")
         self.protocols = kwargs.pop("protocols", [])
 
