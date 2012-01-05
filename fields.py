@@ -48,7 +48,8 @@ class URLField(models.Field):
         Set as VARCHAR for Postgres.
         """
         #TODO: Set up multiple backend testing.
-        return "VARCHAR(%s)" % (self.max_length, )
+        return "VARCHAR(%s) NOT NULL DEFAULT ''::character varying" %
+            (self.max_length, )
 
     def formfield(self, **kwargs):
         """
