@@ -1,4 +1,14 @@
-To use my custom url field:
+This is a Django URLField model field.
+
+It takes a default protocol, (if not supplied, is http)
+and a list of other protocols.
+It then splits the url by "://", and if there is no protocol, it prepends http:// to the url.
+If there is a protocol, it will check to make sure it is accepted. If it is, everything validates.
+If it is not, it throws a ValidationError.
+
+
+
+
 
 Example:
 
@@ -8,10 +18,10 @@ from customurlfield.fields import URLField
 
 class TestModel(models.Model):
     customurl = URLField(default_protocol="http",protocols=["https","ssh","spdy"])
-                                                 # protocols must be a list.
+                         # protocols must be a list.
+                         # accepts http, https, ssh, and spdy for a url.
 
 
 
 
-This url field checks that the protocol is accepted (being in default_protocol, or protocols.) 
-if there is no protocol, it prepends the default protocol to the url.
+Tyrel Souza 2012
