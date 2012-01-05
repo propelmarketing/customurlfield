@@ -40,9 +40,9 @@ class URLField(models.Field):
             return value
 
     def db_type(self, connection):
-        #Set as VARCHAR for Postgres. 
+        #Set as VARCHAR for Postgres.
         #TODO: Set up multiple backend testing.
-        return "VARCHAR(%s)" % (self.max_length, ) 
+        return "VARCHAR(%s)" % (self.max_length, )
 
     def formfield(self, **kwargs):
         defaults = {'form_class':URLFieldForm}
@@ -50,7 +50,7 @@ class URLField(models.Field):
         defaults['protocols'] = self.protocols
         defaults.update(kwargs)
         return super(URLField, self).formfield(**defaults)
-        
+
     def get_prep_value(self, value):
         """
         This will check whether the url is either:
@@ -64,13 +64,13 @@ class URLField(models.Field):
         else:
             url_parts = str(value).split("://")
             if len(url_parts) == 1:
-                value = "%s://%s" % (self.default_protocol, value)  
-                return value                                   
-            elif len(url_parts) == 2:                              
+                value = "%s://%s" % (self.default_protocol, value)
+                return value
+            elif len(url_parts) == 2:
                 if url_parts[0].lower() in self.protocols or\
                    url_parts[0].lower() == self.default_protocol:
                     if url_parts[1]:
-                        return value                                   
+                        return value
                     else:
                         raise forms.ValidationError(
                             "Must supply more than just a protocol.")
@@ -88,7 +88,7 @@ class URLFieldForm(fields.CharField):
     def __init__(self, *args, **kwargs):
         self.default_protocol = kwargs.pop("default_protocol", "http")
         self.protocols = kwargs.pop("protocols", [])
-         
+
         dwargs = {
             'required':False, 'label':None, 'blank':True, 'initial':None,
             'help_text':None, 'error_messages':None,
