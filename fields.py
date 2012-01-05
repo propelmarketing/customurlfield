@@ -97,7 +97,7 @@ class URLFieldForm(fields.CharField):
             if attr in kwargs:
                 dwargs[attr] = kwargs[attr]
 
-        super(URLFieldForm,self).__init__(*args, **kwargs)
+        super(URLFieldForm, self).__init__(*args, **kwargs)
 
     def clean(self, value):
         """
