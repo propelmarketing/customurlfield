@@ -1,0 +1,17 @@
+To use my custom url field:
+
+Example:
+
+from django.db import models
+from customurlfield.fields import URLField
+
+
+class TestModel(models.Model):
+    customurl = URLField(default_protocol="http",protocols=["https","ssh","spdy"])
+                                                 # protocols must be a list.
+
+
+
+
+This url field checks that the protocol is accepted (being in default_protocol, or protocols.) 
+if there is no protocol, it prepends the default protocol to the url.
