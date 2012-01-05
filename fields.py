@@ -44,7 +44,7 @@ class URLField(models.Field):
         return "VARCHAR(%s)" % (self.max_length, )
 
     def formfield(self, **kwargs):
-        defaults = {'form_class':URLFieldForm}
+        defaults = {'form_class': URLFieldForm}
         defaults['default_protocol'] = self.default_protocol
         defaults['protocols'] = self.protocols
         defaults.update(kwargs)
@@ -54,7 +54,7 @@ class URLField(models.Field):
         """
         This will check whether the url is either:
         Protocolless - (and appends a default_protocol to the beginning)
-		has a correct protoco - (returns the url)
+        has a correct protoco - (returns the url)
         If neither of these are a result, it will error with an appropriate
             error message
         """
@@ -89,9 +89,9 @@ class URLFieldForm(fields.CharField):
         self.protocols = kwargs.pop("protocols", [])
 
         dwargs = {
-            'required':False, 'label':None, 'blank':True, 'initial':None,
-            'help_text':None, 'error_messages':None,
-            'show_hidden_initial':None,
+            'required': False, 'label': None, 'blank': True, 'initial': None,
+            'help_text': None, 'error_messages': None,
+            'show_hidden_initial': None,
         }
         for attr in dwargs:
             if attr in kwargs:
@@ -102,8 +102,8 @@ class URLFieldForm(fields.CharField):
     def clean(self, value):
         """
         This will check whether the url is either:
-		Protocolless - (and appends a default_protocol to the beginning)
-		has a correct protoco - (returns the url)
+        Protocolless - (and appends a default_protocol to the beginning)
+        has a correct protoco - (returns the url)
         If neither of these are a result, it will error with an appropriate
             error message
         """
