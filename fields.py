@@ -15,12 +15,11 @@ url = URLField()
 """
 
 
-
 class URLField(models.Field):
     description = "URL Field"
     __metaclass__ = models.SubfieldBase
 
-    def __init__(self,default_protocol="http",protocols=[], *args, **kwargs):
+    def __init__(self, default_protocol="http", protocols=[], *args, **kwargs):
         #Sets the max length of 4096 in the database.
         kwargs['max_length'] = kwargs.get("max_length", 4096)
         #Sets the default protocol
@@ -54,7 +53,7 @@ class URLField(models.Field):
     def get_prep_value(self, value):
         """
         This will check whether the url is either:
-		Protocolless - (and appends a default_protocol to the beginning)
+        Protocolless - (and appends a default_protocol to the beginning)
 		has a correct protoco - (returns the url)
         If neither of these are a result, it will error with an appropriate
             error message
