@@ -1,6 +1,5 @@
 ## This is a Django FileField model field with custom S3 Attributes.
 ### How To Use
-
 #### Example Model File
     from django.db import models
     from s3filefield.fields import S3FileField
