@@ -4,6 +4,7 @@ import os
 from urlparse import urlparse
 from .fields import S3FileField
 
+
 #pre_delete.connect(s3_clean_model, sender=Resume)
 def s3_clean_model(sender, instance, **kwargs):
     s3 = boto.connect_s3(settings.AWS_ACCESS_KEY_ID,
