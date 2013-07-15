@@ -10,6 +10,9 @@ def s3_clean_model(sender, instance, **kwargs):
     """
         This deletes the file from S3
     """
+    s3_clean_model_function(instance)
+
+def s3_clean_model_function(instance):
     # Get the connection information from settings
     s3 = boto.connect_s3(settings.AWS_ACCESS_KEY_ID,
                          settings.AWS_SECRET_ACCESS_KEY)
@@ -24,7 +27,7 @@ def s3_clean_model(sender, instance, **kwargs):
     # fields.
     for _field in fields:
         field = getattr(instance, _field.name)  # Get the field
-
+        print "S3 Deleting:", field.url
         f = urlparse(
             field.url).path  # Get the file path by splitting it from the S3 url.
         fname = os.path.basename(f)  # Get the file name

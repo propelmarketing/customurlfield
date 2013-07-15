@@ -52,4 +52,8 @@ class S3FileField(models.FileField):
         path_fields.extend([filename.split(".")[-1],
                             file_hash,
                             filename])
-        return "/".join(path_fields)
+
+        path = "/".join(path_fields)
+
+        print "upload_to:", path
+        return path
