@@ -37,16 +37,16 @@ class S3FieldTest(TestCase):
         self._f.close()
 
         self.bucket = settings.AWS_STORAGE_BUCKET_NAME
-        self.correct_s3file = "py/%s/__init__.py" % self.sha1_hex
-        self.correct_s3file2 = "loremipsum/py/%s/__init__.py" % self.sha1_hex
 
         self.file1 = File(open('%s/__init__.py' % self.filedir, 'r'))
+        self.correct_s3file = "py/%s/__init__.py" % self.sha1_hex
+
         self.file2 = File(open('%s/__init__.py' % self.filedir, 'r'))
+        self.correct_s3file2 = "loremipsum/py/%s/__init__.py" % self.sha1_hex
 
     def test_backend(self):
         testmodel = S3TestModel()
         testmodel.extra = 'loremipsum'
-
 
         testmodel.s3file = self.file1
         testmodel.s3file.save("__init__.py", self.file1)
