@@ -3,7 +3,6 @@ from django.core.files import File
 from django.conf import settings
 import hashlib
 import os
-from copy import copy
 from django.db import models
 from s3filefield.fields import S3FileField
 from s3filefield.signals import s3_clean_model_function
