@@ -1,4 +1,3 @@
-#-*- coding: utf-8 -*-
 from django.db import models
 import hashlib
 
@@ -16,7 +15,7 @@ class S3FileField(models.FileField):
 
         # if there was not an upload_to supplied, use our built in function
         if not kwargs.get('upload_to', None):
-            kwargs['upload_to'] = self._upload_to
+            kwargs['upload_to'] = self.upload_to
 
         super(S3FileField, self).__init__(*args, **kwargs)
 
