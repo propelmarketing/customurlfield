@@ -5,7 +5,7 @@ import hashlib
 import os
 from django.db import models
 from s3filefield.fields import S3FileField
-from s3filefield.signals import s3_clean_model_function
+from s3filefield.signals import s3_clean_model
 
 
 class S3TestModel(models.Model):
@@ -61,7 +61,7 @@ class S3FieldTest(TestCase):
         self.assertIn(self.bucket, testmodel.s3file.url)
         self.assertIn(self.bucket, testmodel.s3file2.url)
 
-        s3_clean_model_function(testmodel)
+        s3_clean_model(sender=None, instance=testmodel)
 
     def tearDown(self):
         self.file1.close()

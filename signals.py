@@ -10,9 +10,6 @@ def s3_clean_model(sender, instance, **kwargs):
     """
         This deletes the file from S3
     """
-    s3_clean_model_function(instance)
-
-def s3_clean_model_function(instance):
     # Get the connection information from settings
     s3 = boto.connect_s3(settings.AWS_ACCESS_KEY_ID,
                          settings.AWS_SECRET_ACCESS_KEY)
