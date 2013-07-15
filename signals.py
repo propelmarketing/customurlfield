@@ -27,7 +27,6 @@ def s3_clean_model_function(instance):
     # fields.
     for _field in fields:
         field = getattr(instance, _field.name)  # Get the field
-        print "S3 Deleting:", field.url
         f = urlparse(
             field.url).path  # Get the file path by splitting it from the S3 url.
         fname = os.path.basename(f)  # Get the file name

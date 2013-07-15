@@ -54,6 +54,4 @@ class S3FileField(models.FileField):
                             filename])
 
         path = "/".join(path_fields)
-
-        print "upload_to:", path
         return path
