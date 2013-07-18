@@ -2,8 +2,10 @@ from django.db import models
 import hashlib
 
 
+
 class S3FileField(models.FileField):
     description = "S3 File Field"
+
 
     def __init__(self, s3_fields=[], *args, **kwargs):
         """
@@ -33,7 +35,7 @@ class S3FileField(models.FileField):
         # partitioning.
         for attr in self.s3_fields:
             try:
-                path_fields.append(getattr(instance, attr))
+                path_fields.append(str(getattr(instance, attr)))
             except:
                 # If it doesn't exist in the model, inform the user that the
                 # attribute was wrong
