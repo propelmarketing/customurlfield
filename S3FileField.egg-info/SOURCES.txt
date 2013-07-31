@@ -1,0 +1,13 @@
+MANIFEST.in
+README.txt
+setup.py
+S3FileField.egg-info/PKG-INFO
+S3FileField.egg-info/SOURCES.txt
+S3FileField.egg-info/dependency_links.txt
+S3FileField.egg-info/requires.txt
+S3FileField.egg-info/top_level.txt
+s3filefield/__init__.py
+s3filefield/fields.py
+s3filefield/models.py
+s3filefield/signals.py
+s3filefield/tests.py
