@@ -24,13 +24,14 @@ def s3_clean_model(sender, instance, **kwargs):
     # fields.
     for _field in fields:
         field = getattr(instance, _field.name)  # Get the field
-        f = urlparse(
-            field.url).path  # Get the file path by splitting it from the S3 url.
-        fname = os.path.basename(f)  # Get the file name
+        if field:
+            f = urlparse(
+                field.url).path  # Get the file path by splitting it from the S3 url.
+            fname = os.path.basename(f)  # Get the file name
 
-        # Actually tell the bucket to delete the keys
-        key1 = bucket.delete_key(f)
-        key2 = bucket.delete_key(f.split(fname)[0])
-        # Make sure the delete returned an object.
-        assert(bool(key1))
-        assert(bool(key2))
+            # Actually tell the bucket to delete the keys
+            key1 = bucket.delete_key(f)
+            key2 = bucket.delete_key(f.split(fname)[0])
+            # Make sure the delete returned an object.
+            assert(bool(key1))
+            assert(bool(key2))
